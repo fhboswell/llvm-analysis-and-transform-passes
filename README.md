@@ -30,7 +30,7 @@ LLVM has a variety of librarys that can be used to analyse and transform IR. Ins
     * This pass will add instrumentation to the program that sums up the number of instructions at runtime.
     * The instrumentation in the pass will call an external module which will do the actual counting of the information sent to it.
     * Write an explination and directions about how to use the pass.
-5. Transformation Pass                          -12.21.16
+5. Transformation Pass                          <p align="center">-12.21.16</p>
     * Convert all doubles in a program into floats.
 
 
