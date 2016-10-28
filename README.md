@@ -37,7 +37,7 @@ LLVM has a variety of libraries that can be used to analyze and transform IR. In
 5. Transformation Pass
     * 12.21.16
     * Convert all doubles in a program into floats.
-    * I am still learning a lot about possibilities and optimizations so I may change this.
+    * I am still learning a lot about LLVM and optimization so I may change this.
 
 
 ## Requirements
