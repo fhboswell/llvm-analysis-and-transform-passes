@@ -30,12 +30,14 @@ LLVM has a variety of libraries that can be used to analyze and transform IR. In
 4. Dynamic Analysis Using an External Module    
     * 11.30.16        
     * Get a count of each type of instruction as execute at runtime.
-    * This pass will add instrumentation to the program that sums up the number of instructions at runtime.
-    * The instrumentation in the pass will call an external module which will do the actual counting of the information sent to it.
+    * This pass will add instrumentation to the program IR.
+    * the instrumentation will call an external function in a module that I will write.
+    * This external function which will do the actual counting of the information sent to it.
     * Write an explanation and directions about how to use the pass.
 5. Transformation Pass
     * 12.21.16
     * Convert all doubles in a program into floats.
+    * I am still learning a lot about possibilities and optimizations so I may change this.
 
 
 ## Requirements
