@@ -1,25 +1,22 @@
 #LLVM Analysis And Transform Passes
 
-#Franklin Henry Boswell
 
+This project uses Clang and LLVM to alayse and optimise C++ source code.
 
-LLVM is used for many things perhaps most importantly it can help analyse and then optimise code.
+### How It Works
 
+Clang is a front end to LLVM, it compiles C++ into IR. Intermediate Representation is far simpler then C++, making it easier analyse.
 
+LLVM has a variety of librarys that can be used to analyse and manipulate IR. Instructions for an alalysis or a transformation are called a [pass](http://llvm.org/docs/GettingStarted.html#overview).
 
-## Getting Started
-
-Clang is effectivly a front end to LLVM, it compiles C++ into LLVM bitcode also known as IR
-
-LLVM has a variety of tools that can be used to analyse and manipulate the afformentioned bytecode. 
-    Instructions for an alalysis or a transformation are called a * [pass](http://llvm.org/docs/GettingStarted.html#overview).
-http://llvm.org/docs/WritingAnLLVMPass.html#introduction-what-is-a-pass
 
 ### Prerequisites
 
 LLVM and Clang are required to compile and apply the passes.
-CMake is Required to build them.
+CMake is Required to build LLVM and Clang.
 
-* [LLVM and Clang](http://llvm.org/docs/GettingStarted.html#overview)
+* [LLVM](http://llvm.org/docs/GettingStarted.html#overview)
+* [Clang](http://clang.llvm.org/get_started.html)
 * [CMake](http://llvm.org/docs/GettingStarted.html#overview)
+
 
