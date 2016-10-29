@@ -15,6 +15,7 @@ LLVM has a variety of libraries that can be used to analyze and transform IR. In
 
 1. Static Analysis                              
     * 11.12.16
+    * Compile a program down to IR using Clang.
     * Get a count of each type of instruction in the IR bitcode.
     * Write an explanation and directions about how to use the pass.
 2.  Dynamic Analysis Using Transformation        
@@ -25,16 +26,16 @@ LLVM has a variety of libraries that can be used to analyze and transform IR. In
     * Write an explanation and directions about how to use the pass.
 3. Travis-Ci                                    
     * 11/25/16
-    * Write tests to compile and run the pass using Travis-Ci.
+    * Write tests to compile and run the passes using Travis-Ci.
     * This may require compiling a pass out of source.
 4. Dynamic Analysis Using an External Module    
     * 11.30.16        
-    * Get a count of each type of instruction as execute at runtime.
+    * Get a count of each type of instruction as executed at runtime.
     * This pass will add instrumentation to the program IR.
     * the instrumentation will call an external function in a module that I will write.
-    * This external function which will do the actual counting of the information sent to it.
+    * This external function which will do the actual counting using the information sent to it by the transformed IR.
     * Write an explanation and directions about how to use the pass.
-5. Transformation Pass
+5. Transformation or Optimization Pass
     * 12.21.16
     * Convert all doubles in a program into floats.
     * I am still learning a lot about LLVM and optimization so I may change this.
