@@ -50,7 +50,9 @@ CMake is required to build LLVM and Clang.
 * [Clang](http://clang.llvm.org/get_started.html)
 * [CMake](http://llvm.org/docs/GettingStarted.html#overview)
 
+## Guide
 
+`<addr>` element here instead.
 
 
 
