@@ -52,6 +52,19 @@ CMake is required to build LLVM and Clang.
 
 ## Guide
 
+Before following this guide you should have downloaded and built LLVM
+
+In order to apply a pass to some c code there are a number of steps that must be tacken, they are as follows.
+
+1. Clone the project to your computer.
+2. Navigate to 'LLVM_Source_Directory/lib/Transforms'
+3. Copy "StaticCount" into the directory listed above
+4. Inside the 'Transforms' directory there should be a number of directorys and only one file 'CMakeLists.txt'
+5. Open 'CMakeLists.tst' and add the line 'add_subdirectory(StaticCount)'
+6. 
+
+
+
 `<addr>` element here instead.
 
 
