@@ -74,6 +74,9 @@ In order to apply a pass to some c code there are a number of steps that must be
 8. Run `clang -O0 -emit-llvm -c main.cpp -o bctest.bc` this uses clang to compile our c++ file down to bytecode that llvm can work with.
 9. Run `opt -load <LLVM_Build_Directory>/lib/llvmstaticcount.dylib  -StaticCount -stats< bctest.bc > /dev/null` The printed statments are a result of the static analysis using llvm.
 
+![Screenshot](/images/milestone1.jpeg)
+Format: ![Screenshot with reduced output.](url)
+
 Trouble using my pass or see an error in my readme? Please email me.
 
 
