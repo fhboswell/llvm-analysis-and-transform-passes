@@ -1,18 +1,5 @@
 
 
-#include "llvm/Pass.h"
-#include "llvm/IR/Module.h"
-#include "llvm/IR/Function.h"
-#include "llvm/IR/BasicBlock.h"
-#include "llvm/Support/raw_ostream.h"
-#include "llvm/IR/Type.h"
-#include "llvm/IR/Instructions.h"
-#include "llvm/IR/Instruction.h"
-#include "llvm/IR/GlobalVariable.h"
-
-#include "llvm/IR/IRBuilder.h"
-
-
 
 #include "llvm/Pass.h"
 #include "llvm/IR/Module.h"
@@ -59,6 +46,13 @@ bool CountStats::runOnModule(Module &M) {
     return false; // ir not modified
 }
 
+
+
+
+
+
+
+
 //Function
 bool CountStats::runOnFunction(Function &F, Module &M) {
     
@@ -70,26 +64,21 @@ bool CountStats::runOnFunction(Function &F, Module &M) {
     
     Constant *branLog = F.getParent()->getOrInsertFunction("BRAN", Type::getVoidTy(Context), NULL);
     
+    Constant *loadLog = F.getParent()->getOrInsertFunction("LOAD", Type::getVoidTy(Context), NULL);
+    
+    Constant *storeLog = F.getParent()->getOrInsertFunction("STORE", Type::getVoidTy(Context), NULL);
+    
+    Constant *callLog = F.getParent()->getOrInsertFunction("CALL", Type::getVoidTy(Context), NULL);
+    
+    Constant *instLog = F.getParent()->getOrInsertFunction("INST", Type::getVoidTy(Context), NULL);
+    
     
     for (auto& B : F) {
         for (auto& I : B) {
             
-            
-          
+             //errs().write_escaped(I.getOpcodeName()) << '\n';
           
            
-            
-            
-            if (auto* op = dyn_cast<BinaryOperator>(&I)) {
-                
-                IRBuilder<> builder(op);
-                builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
-                builder.CreateCall(BOLog);
-                
-               
-                
-                
-            }
             if (auto* op = dyn_cast<AllocaInst>(&I)) {
                 
                 IRBuilder<> builder(op);
@@ -99,33 +88,83 @@ bool CountStats::runOnFunction(Function &F, Module &M) {
                 
                 
                 
-            }
-            
-            if (auto* op = dyn_cast<  BranchInst>(&I)) {
+                
+            }else if (auto* op = dyn_cast<BinaryOperator>(&I)) {
                 
                 IRBuilder<> builder(op);
                 builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+                builder.CreateCall(BOLog);
+                
+                
+                
+                
+            } else  if (auto* op = dyn_cast<StoreInst>(&I)) {
+                
+                IRBuilder<> builder(op);
+                builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+                builder.CreateCall(storeLog);
+                
+                
+            } else  if (auto* op = dyn_cast<LoadInst>(&I)) {
+                
+                IRBuilder<> builder(op);
+                builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+                builder.CreateCall(loadLog);
+                
+
+            } else  if (auto* op = dyn_cast<BranchInst>(&I)) {
+                
+                IRBuilder<> builder(op);
+                builder.SetInsertPoint(&B, --builder.GetInsertPoint());
                 builder.CreateCall(branLog);
                 
                 
-                
-                
             }
-            
-            
+
+
+           
            
             /*
-            if (auto* op = dyn_cast<Instruction>(&I)) {
-                
-                IRBuilder<> builder(&B);
-                builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
-                builder.CreateCall(logFunc);
-                
-                return true;
-                
-                
-            }
+             
             
+             if (auto* op = dyn_cast<BranchInst>(&I)) {
+             
+             IRBuilder<> builder(op);
+             builder.SetInsertPoint(&B, --builder.GetInsertPoint());
+             builder.CreateCall(branLog);
+             
+             
+             }
+             
+             
+             if (auto* op = dyn_cast<BinaryOperator>(&I)) {
+             
+             IRBuilder<> builder(op);
+             builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+             builder.CreateCall(BOLog);
+             
+             
+             
+             
+             }
+             
+             if (auto* op = dyn_cast<BranchInst>(&I)) {
+             
+             IRBuilder<> builder(op);
+             builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+             builder.CreateCall(branLog);
+             
+             
+             }
+             
+             if (auto* op = dyn_cast<StoreInst>(&I)) {
+             
+             IRBuilder<> builder(op);
+             builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+             builder.CreateCall(storeLog);
+             
+             
+             }
             const char * test1 = I.getOpcodeName();
             const char * test2 = "add";
             
@@ -134,12 +173,26 @@ bool CountStats::runOnFunction(Function &F, Module &M) {
                 
             }
              
-            //errs().write_escaped(I.getOpcodeName()) << '\n';
+            
             IRBuilder<> builder(&I);
             builder.SetInsertPoint(&I);
             builder.CreateCall(logFunc);
              
+             
+             if (auto* op = dyn_cast<Instruction>(&I)) {
+             
+             IRBuilder<> builder(&B);
+             builder.SetInsertPoint(&B, ++builder.GetInsertPoint());
+             builder.CreateCall(instLog);
+             
+             
+             
+             
+             }
+             
              */
+            
+            
             
         }
     }
