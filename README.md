@@ -18,7 +18,7 @@ LLVM has a variety of libraries that can be used to analyze and transform IR. In
     * Compile a program down to IR using Clang.
     * Get a count of each type of instruction in the IR bitcode.
     * Write an explanation and directions about how to use the pass.
-2.  Dynamic Analysis Using Transformation        
+2.  Dynamic Analysis Using Transformation  `Done See Below`        
     * 11.20.16 
     * Compile a program down to IR using Clang.
     * Add instrumentation to the program using a LLVM pass which modifies the IR.
@@ -71,7 +71,7 @@ In order to apply a pass to some c code there are a number of steps that must be
 4. Inside the `Transforms` directory there should be a number of directorys and only one file `CMakeLists.txt`.
 5. Open `CMakeLists.txt` and add the line `add_subdirectory(StaticCount)`.
 6. In terminal navigate to the root of your `<LLVM_Build_Directory>` and run `cmake --build .` this will build all of LLVM including the pass we just added.
-7. Now navigate into the `heaptime` directory inside the cloned repository.
+7. Now navigate into the `HeapTimeTestProgram` directory inside the cloned repository.
 8. Run `clang -O0 -emit-llvm -c main.cpp -o bctest.bc` this uses clang to compile our c++ file down to bytecode that llvm can work with.
 9. Run `opt -load <LLVM_Build_Directory>/lib/llvmstaticcount.dylib  -StaticCount -stats< bctest.bc > /dev/null` The printed statments are a result of the static analysis using llvm.
 
@@ -102,7 +102,7 @@ In order to apply a pass to C code there are a number of steps that must be tack
 4. Inside the `Transforms` directory there should be a number of directorys and only one file `CMakeLists.txt`.
 5. Open `CMakeLists.txt` and add the line `add_subdirectory(DynCount)`.
 6. In terminal navigate to the root of your `<LLVM_Build_Directory>` and run `cmake --build .` this will build all of LLVM including the pass we just added.
-7. Now navigate into the `smalltest` directory inside the cloned repository.
+7. Now navigate into the `SmallTestProgram` directory inside the cloned repository.
 8. Run `clang -O0 -emit-llvm -c smallProgram.c -o sp.bc` this uses clang to compile our c file down to bytecode that llvm can work with.
 9. Run `clang -O0 -emit-llvm -c print -o p.bc` this uses clang to compile our runtime library down to bytecode that can be linked with the program we compiled above.
 10. Run `llvm-link p.bc sp.bc -S -o smallprogramandprint.bc` this links our program to be analysed and our runtime library.
