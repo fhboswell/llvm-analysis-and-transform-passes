@@ -22,34 +22,33 @@ using namespace llvm;
 
 
 namespace {
-    
+
     struct CountStats : public ModulePass {
         static char ID;
         CountStats() : ModulePass(ID) {}
         bool runOnModule(Module &M);
         bool runOnFunction(Function &F, Module &M);
     };
-    
+
 }
 
 char CountStats::ID = 0;
 
 
 static RegisterPass<CountStats>
-X("StaticCount", "Count Statistics", false, false);
+        X("StaticCount", "Count Statistics", false, false);
 
-//Module
+
 bool CountStats::runOnModule(Module &M) {
     for(Module::iterator F = M.begin(), E = M.end(); F != E; ++F) {
         ++TotalFunctions;
         runOnFunction(*F, M);
     }
-    return false; // ir not modified
+    return false;
 }
 
-//Function
 bool CountStats::runOnFunction(Function &F, Module &M) {
-    
+
     for (auto& B : F) {
         for (auto& I : B) {
             if (auto* AllocInst = dyn_cast<AllocaInst>(&I)) {
@@ -57,18 +56,18 @@ bool CountStats::runOnFunction(Function &F, Module &M) {
             }
             if (auto* op = dyn_cast<BinaryOperator>(&I)) {
                 ++TotalBinaryOperators;
-                errs() << "Instruction: ";
+                //errs() << "Instruction: ";
                 //errs().write_escaped(op->getName()) << '\n';
-                
+
                 //op->dump();
             }
             errs().write_escaped(I.getOpcodeName()) << '\n';
-            
+
         }
     }
     for(Function::iterator BB = F.begin(), E = F.end(); BB != E; ++BB) {
-        
+
         TotalInstructions += BB->getInstList().size();
     }
-    return false; // ir not modified
+    return false;
 }
